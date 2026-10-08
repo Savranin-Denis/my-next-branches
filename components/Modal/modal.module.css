@@ -1,0 +1,21 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный темный фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Чтобы модалка была поверх всего остального */
+}
+
+.modal {
+  background-color: #1e1e1e; /* Цвет фона окна (под темную тему) */
+  padding: 24px;
+  border-radius: 8px;
+  min-width: 320px;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
