@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Edit Profile',
+  description: 'Edit your user details and settings',
+};
 
 const Profile = () => {
   return (

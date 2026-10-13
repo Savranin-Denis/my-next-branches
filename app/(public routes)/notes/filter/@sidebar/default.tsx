@@ -1,21 +1,35 @@
-import { getCategories } from '@/lib/api';
-import Link from 'next/link';
+// import { getCategories } from '@/lib/api';
+// import Link from 'next/link';
 
-const NotesSidebar = async () => {
-  const categories = await getCategories();
+// const NotesSidebar = async () => {
+//   const categories = await getCategories();
 
+//   return (
+//     <ul>
+//       <li>
+//         <Link href={`/notes/filter/all`}>All notes</Link>
+//       </li>
+//       {categories.map(category => (
+//         <li key={category.id}>
+//           <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// };
+
+// export default NotesSidebar;
+
+import Loader from '@/components/Loader/Loader';
+import NotesSidebar from '@/components/NotesSidebar/NotesSidebar';
+import { Suspense } from 'react';
+
+const Sidebar = () => {
   return (
-    <ul>
-      <li>
-        <Link href={`/notes/filter/all`}>All notes</Link>
-      </li>
-      {categories.map(category => (
-        <li key={category.id}>
-          <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>
-        </li>
-      ))}
-    </ul>
+    <Suspense fallback={<Loader />}>
+      <NotesSidebar />
+    </Suspense>
   );
 };
 
-export default NotesSidebar;
+export default Sidebar;
