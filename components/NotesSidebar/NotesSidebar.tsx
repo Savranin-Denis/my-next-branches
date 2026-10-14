@@ -5,16 +5,21 @@ const NotesSidebar = async () => {
   const categories = await getCategories();
 
   return (
-    <ul>
-      <li>
-        <Link href={`/notes/filter/all`}>All notes</Link>
-      </li>
-      {categories.map(category => (
-        <li key={category.id}>
-          <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>
+    <>
+      <Link href="/notes/action/create">
+        <h2>Create note</h2>
+      </Link>
+      <ul>
+        <li>
+          <Link href={`/notes/filter/all`}>All notes</Link>
         </li>
-      ))}
-    </ul>
+        {categories.map(category => (
+          <li key={category.id}>
+            <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

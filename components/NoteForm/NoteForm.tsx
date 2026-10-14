@@ -1,0 +1,94 @@
+'use client';
+
+import { useNoteDraftStore } from '@/app/lib/stores/noteStore';
+import { Category, createNote, NewNoteData } from '@/lib/api';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+
+type Props = {
+  categories: Category[];
+};
+
+const NoteForm = ({ categories }: Props) => {
+  const router = useRouter();
+
+  const { draft, setDraft, clearDraft } = useNoteDraftStore();
+
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setDraft({
+      ...draft,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleCancel = () => {
+    router.push('/notes/filter/all');
+  };
+
+  //   const handleSubmit = (formdata: FormData) => {
+  //     const values = Object.fromEntries(formdata);
+  //     console.log(values);
+  //   };
+
+  const { mutate } = useMutation({
+    mutationFn: createNote,
+    onSuccess: () => {
+      clearDraft();
+      router.push('/notes/filter/all');
+    },
+  });
+
+  const handleSubmit = (formdata: FormData) => {
+    const values = Object.fromEntries(formdata) as NewNoteData;
+    mutate(values);
+  };
+
+  return (
+    <form action={handleSubmit}>
+      <label>
+        Title
+        <input
+          type="text"
+          name="title"
+          defaultValue={draft.title}
+          onChange={handleChange}
+        />
+      </label>
+
+      <label>
+        Content
+        <textarea
+          name="content"
+          defaultValue={draft.content}
+          onChange={handleChange}
+        ></textarea>
+      </label>
+
+      <label>
+        <select
+          name="category"
+          defaultValue={draft.categoryId}
+          onChange={handleChange}
+        >
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label>
+      <div>
+        <button type="submit">Create</button>
+        <button onClick={handleCancel} type="button">
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+};
+
+export default NoteForm;
