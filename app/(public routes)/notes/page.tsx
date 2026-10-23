@@ -26,7 +26,7 @@
 // export default Notes;
 
 import NoteList from '@/components/NoteList/NoteList';
-import { getNotes } from '@/lib/api';
+import { getNotes } from '@/lib/api/api';
 
 const Notes = async () => {
   const response = await getNotes();

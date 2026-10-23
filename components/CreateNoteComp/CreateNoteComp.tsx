@@ -1,4 +1,4 @@
-import { getCategories } from '@/lib/api';
+import { getCategories } from '@/lib/api/api';
 import NoteForm from '../NoteForm/NoteForm';
 
 const CreateNoteComp = async () => {

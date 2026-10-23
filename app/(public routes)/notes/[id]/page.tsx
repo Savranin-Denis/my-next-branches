@@ -31,7 +31,7 @@
 
 import Loader from '@/components/Loader/Loader';
 import NoteDetails from '@/components/NotesDetails/NotesDetails';
-import { getSingleNote } from '@/lib/api';
+import { getSingleNote } from '@/lib/api/clientApi';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
